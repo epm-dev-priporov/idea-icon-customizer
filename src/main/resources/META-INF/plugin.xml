@@ -2,15 +2,19 @@
 <idea-plugin>
     <id>dev.priporov.custom-icons</id>
     <name>Custom-icons</name>
-    <vendor email="support@yourcompany.com" url="https://www.yourcompany.com">YourCompany</vendor>
+    <vendor email="devpriporov@mail.ru" url="https://github.com/epm-dev-priporov">Dmitrii Priporov</vendor>
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
-  ]]></description>
+
+
+      ]]>
+    </description>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.java</depends>
+    <depends>org.jetbrains.kotlin</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-
+        <iconProvider implementation="dev.priporov.customicons.IconCustomizerExtension"/>
     </extensions>
 </idea-plugin>
