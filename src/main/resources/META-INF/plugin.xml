@@ -1,0 +1,16 @@
+
+<idea-plugin>
+    <id>dev.priporov.custom-icons</id>
+    <name>Custom-icons</name>
+    <vendor email="support@yourcompany.com" url="https://www.yourcompany.com">YourCompany</vendor>
+    <description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+  ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+
+    </extensions>
+</idea-plugin>
