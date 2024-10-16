@@ -20,5 +20,9 @@ class PatternPanel {
 //        imageIconPanel.add(JLabel(ImageIcon("/home/priporov/.iconscustomizer/repository.png")))
         textField1.text = text
 
+        val imageIcon = ImageIcon("/home/priporov/.iconscustomizer/repository.png")
+        val jLabel = JLabel(imageIcon)
+
+        imageIconPanel.add(jLabel, "1,1")
     }
 }
