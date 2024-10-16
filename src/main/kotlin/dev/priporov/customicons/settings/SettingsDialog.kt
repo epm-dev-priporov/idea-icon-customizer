@@ -1,15 +1,16 @@
 package dev.priporov.customicons.settings
 
-import com.intellij.codeInsight.lookup.impl.CompletionExtender
-import com.intellij.ui.*
+import com.intellij.ui.CollectionListModel
+import com.intellij.ui.ColoredListCellRenderer
+import com.intellij.ui.ExpandedItemListCellRendererWrapper
 import com.intellij.ui.components.JBList
-import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.JBTextField
 import dev.priporov.customicons.pattern.RegexpPatternItem
-import java.awt.BorderLayout
+import dev.priporov.customicons.pattern.panel.PatternPanel
 import java.awt.Component
+import java.awt.GridBagConstraints
+import java.awt.GridBagLayout
 import java.awt.GridLayout
-import javax.swing.DefaultListCellRenderer
 import javax.swing.JList
 import javax.swing.JPanel
 import javax.swing.ListCellRenderer
@@ -21,40 +22,31 @@ class SettingsDialog(private val iconConfigurable: IconConfigurable) {
 
     private var patternPanel: MutableList<RegexpPatternItem> = ArrayList()
     private val list = JBList<Any?>(CollectionListModel(patternPanel))
-    private val textArea = JBTextField()
+    private val patternEditingPanel = PatternPanel().root
 
     init {
-        val jbScrollPane = JBScrollPane()
-        jbScrollPane.setViewportView(list)
+        val toolbarPanel = NoteToolbarFactory.getInstance(list)
 
-        val createScrollPane = ScrollPaneFactory.createScrollPane(
-            jbScrollPane,
-            SideBorder.TOP
-        )
         val data: MutableList<RegexpPatternItem> = patternPanel
         for (i in 0..50) {
-            data.add(RegexpPatternItem("Item $i"))
+            data.add(RegexpPatternItem("Item LONG LONG LONG  $i"))
         }
         list.setListData(data.toTypedArray())
 
-        val rendererWrapper: ExpandedItemListCellRendererWrapper<Any> = ExpandedItemListCellRendererWrapper(
-            DefaultListCellRenderer(),
-            CompletionExtender(list)
-        )
-
-        list.setCellRenderer(CustomListCellRenderer(textArea, rendererWrapper))
-
+//        val rendererWrapper: ExpandedItemListCellRendererWrapper<Any> = ExpandedItemListCellRendererWrapper(
+//            DefaultListCellRenderer(),
+//            CompletionExtender(list)
+//        )
+//        list.setCellRenderer(CustomListCellRenderer(textArea, rendererWrapper))
+        val gridBag = GridBagConstraints()
         root.apply {
-            layout = GridLayout(3,2).apply {
-                addLayoutComponent("123", createScrollPane)
-                addLayoutComponent("123", list)
-                addLayoutComponent("123", textArea)
-                addLayoutComponent("123", JPanel())
+            layout = GridLayout(1,2).apply {
+                add(toolbarPanel)
+                add(patternEditingPanel)
             }
             isVisible = true
-            add(createScrollPane)
-            add(list)
-            add(textArea)
+            add(toolbarPanel)
+            add(patternEditingPanel)
         }
 
     }
