@@ -8,6 +8,7 @@ import com.intellij.ui.components.JBTextField
 import dev.priporov.customicons.pattern.RegexpPatternItem
 import java.awt.BorderLayout
 import java.awt.Component
+import java.awt.GridLayout
 import javax.swing.DefaultListCellRenderer
 import javax.swing.JList
 import javax.swing.JPanel
@@ -44,11 +45,11 @@ class SettingsDialog(private val iconConfigurable: IconConfigurable) {
         list.setCellRenderer(CustomListCellRenderer(textArea, rendererWrapper))
 
         root.apply {
-            layout = BorderLayout().apply {
-                addLayoutComponent(createScrollPane, "West")
-                addLayoutComponent(list, "West")
-                addLayoutComponent(textArea, "East")
-                addLayoutComponent(JPanel(), "East")
+            layout = GridLayout(3,2).apply {
+                addLayoutComponent("123", createScrollPane)
+                addLayoutComponent("123", list)
+                addLayoutComponent("123", textArea)
+                addLayoutComponent("123", JPanel())
             }
             isVisible = true
             add(createScrollPane)

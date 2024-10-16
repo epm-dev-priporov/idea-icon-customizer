@@ -7,9 +7,12 @@ class IconConfigurable: SearchableConfigurable {
 
     private var state = false
 
-    private val gui: SettingsDialog by lazy {
-        SettingsDialog(this)
+    private val gui: SettingD by lazy {
+        SettingD()
     }
+//    private val gui: SettingsDialog by lazy {
+//        SettingsDialog(this)
+//    }
 
     override fun createComponent(): JComponent = gui.root
 
