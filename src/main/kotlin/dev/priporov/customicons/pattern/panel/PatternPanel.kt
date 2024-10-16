@@ -9,5 +9,16 @@ class PatternPanel {
     private lateinit var disabledCheckBox: JCheckBox
     private lateinit var comboBox1: JComboBox<*>
     private lateinit var applyButton: JButton
-    private lateinit var iconPanel: JPanel
+    private lateinit var buttonIcon: JButton
+    private lateinit var imageIconPanel: JPanel
+
+    init {
+
+    }
+
+    fun method(text:String){
+//        imageIconPanel.add(JLabel(ImageIcon("/home/priporov/.iconscustomizer/repository.png")))
+        textField1.text = text
+
+    }
 }

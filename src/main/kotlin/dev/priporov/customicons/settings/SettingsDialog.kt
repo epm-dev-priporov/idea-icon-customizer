@@ -20,14 +20,15 @@ class SettingsDialog(private val iconConfigurable: IconConfigurable) {
 
     var root: JPanel = JPanel()
 
-    private var patternPanel: MutableList<RegexpPatternItem> = ArrayList()
-    private val list = JBList<Any?>(CollectionListModel(patternPanel))
-    private val patternEditingPanel = PatternPanel().root
+    private var patternArray: MutableList<RegexpPatternItem> = ArrayList()
+    private val list = JBList<Any?>(CollectionListModel(patternArray))
+    private val patternPanel = PatternPanel()
+    private val patternEditingPanel = patternPanel.root
 
     init {
         val toolbarPanel = NoteToolbarFactory.getInstance(list)
 
-        val data: MutableList<RegexpPatternItem> = patternPanel
+        val data: MutableList<RegexpPatternItem> = patternArray
         for (i in 0..50) {
             data.add(RegexpPatternItem("Item LONG LONG LONG  $i"))
         }
@@ -48,7 +49,12 @@ class SettingsDialog(private val iconConfigurable: IconConfigurable) {
             add(toolbarPanel)
             add(patternEditingPanel)
         }
+        list.addListSelectionListener {
+            val selectedValue: RegexpPatternItem = (it.source as JList<*>).selectedValue as RegexpPatternItem
 
+            patternPanel.method(selectedValue.regex)
+
+        }
     }
 
     class CustomListCellRenderer(
