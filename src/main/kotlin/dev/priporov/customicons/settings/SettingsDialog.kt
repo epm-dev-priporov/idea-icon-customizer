@@ -1,29 +1,28 @@
 package dev.priporov.customicons.settings
 
-import com.intellij.ui.CollectionListModel
-import com.intellij.ui.ScrollPaneFactory
-import com.intellij.ui.SideBorder
+import com.intellij.codeInsight.lookup.impl.CompletionExtender
+import com.intellij.ui.*
 import com.intellij.ui.components.JBList
 import com.intellij.ui.components.JBScrollPane
+import com.intellij.ui.components.JBTextField
+import dev.priporov.customicons.pattern.RegexpPatternItem
 import java.awt.BorderLayout
+import java.awt.Component
 import javax.swing.DefaultListCellRenderer
-import javax.swing.JButton
+import javax.swing.JList
 import javax.swing.JPanel
+import javax.swing.ListCellRenderer
 
 
 class SettingsDialog(private val iconConfigurable: IconConfigurable) {
 
     var root: JPanel = JPanel()
-    private var button: JButton = JButton("test")
 
-    private var patternPanel: MutableList<JPanel> = ArrayList()
+    private var patternPanel: MutableList<RegexpPatternItem> = ArrayList()
     private val list = JBList<Any?>(CollectionListModel(patternPanel))
-//    private val list = JBList<Any?>(ListComboBoxModel(patternPanel))
-    init {
-        button.apply {
-            isVisible = true
-        }
+    private val textArea = JBTextField()
 
+    init {
         val jbScrollPane = JBScrollPane()
         jbScrollPane.setViewportView(list)
 
@@ -31,33 +30,65 @@ class SettingsDialog(private val iconConfigurable: IconConfigurable) {
             jbScrollPane,
             SideBorder.TOP
         )
-        val data: MutableList<String> = ArrayList()
-        data.add("Item 1")
-        data.add("Item 2")
-        data.add("Item 3")
-        data.add("Item 4")
-        data.add("Item 5")
+        val data: MutableList<RegexpPatternItem> = patternPanel
+        for (i in 0..50) {
+            data.add(RegexpPatternItem("Item $i"))
+        }
         list.setListData(data.toTypedArray())
 
-//        val toolbarPanel = NoteToolbarFactory.getInstance(list)
+        val rendererWrapper: ExpandedItemListCellRendererWrapper<Any> = ExpandedItemListCellRendererWrapper(
+            DefaultListCellRenderer(),
+            CompletionExtender(list)
+        )
 
-        list.setCellRenderer(CustomJBListCellRenderer())
+        list.setCellRenderer(CustomListCellRenderer(textArea, rendererWrapper))
 
-        root.layout = BorderLayout().apply {
-//            addLayoutComponent(toolbarPanel, "North")
-            addLayoutComponent(jbScrollPane, "West")
-            addLayoutComponent(list, "West")
-            addLayoutComponent(button, "East")
+        root.apply {
+            layout = BorderLayout().apply {
+                addLayoutComponent(createScrollPane, "West")
+                addLayoutComponent(list, "West")
+                addLayoutComponent(textArea, "East")
+                addLayoutComponent(JPanel(), "East")
+            }
+            isVisible = true
+            add(createScrollPane)
+            add(list)
+            add(textArea)
         }
-        root.isVisible = true
-        root.add(jbScrollPane)
-        root.add(list)
-        root.add(button)
-//        root.add(createScrollPane)
+
     }
 
-}
+    class CustomListCellRenderer(
+        private val textArea: JBTextField,
+        private val rendererWrapper: ExpandedItemListCellRendererWrapper<Any>
+    ) : ListCellRenderer<Any?>, ColoredListCellRenderer<Any?>() {
 
-class CustomJBListCellRenderer: DefaultListCellRenderer(){
+        override fun getListCellRendererComponent(
+            list: JList<out Any?>?,
+            value: Any?,
+            index: Int,
+            isSelected: Boolean,
+            cellHasFocus: Boolean
+        ): Component {
+            if (list != null) {
+                customizeCellRenderer(list, value, index, isSelected, cellHasFocus)
+            }
+            if (list?.selectedValue != null) {
+                textArea.isVisible = true
+            }
+            return rendererWrapper.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus)
+        }
 
+        override fun customizeCellRenderer(
+            list: JList<out Any?>,
+            value: Any?,
+            index: Int,
+            selected: Boolean,
+            hasFocus: Boolean
+        ) {
+            println()
+
+        }
+
+    }
 }
