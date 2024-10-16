@@ -16,5 +16,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <iconProvider implementation="dev.priporov.customicons.IconCustomizerExtension"/>
+        <applicationConfigurable displayName="Icon Customizer"
+                                 instance="dev.priporov.customicons.settings.IconConfigurable"/>
     </extensions>
 </idea-plugin>
