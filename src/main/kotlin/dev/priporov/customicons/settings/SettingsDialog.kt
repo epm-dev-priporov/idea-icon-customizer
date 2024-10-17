@@ -9,7 +9,6 @@ import dev.priporov.customicons.pattern.RegexpPatternItem
 import dev.priporov.customicons.pattern.panel.PatternPanel
 import java.awt.Component
 import java.awt.GridBagConstraints
-import java.awt.GridBagLayout
 import java.awt.GridLayout
 import javax.swing.JList
 import javax.swing.JPanel
@@ -52,8 +51,7 @@ class SettingsDialog(private val iconConfigurable: IconConfigurable) {
         list.addListSelectionListener {
             val selectedValue: RegexpPatternItem = (it.source as JList<*>).selectedValue as RegexpPatternItem
 
-            patternPanel.method(selectedValue.regex)
-
+            patternPanel.showSelectedItem(selectedValue)
         }
     }
 
