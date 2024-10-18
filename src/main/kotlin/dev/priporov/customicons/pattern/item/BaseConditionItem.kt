@@ -13,7 +13,7 @@ open class BaseConditionItem(
 
     var fileType: FileType = FileType.FILE
     var icon: ImageIcon? = null
-    var active: Boolean = true
+    var disabled: Boolean = false
 
     override fun toString(): String {
         return condition

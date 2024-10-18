@@ -21,4 +21,13 @@ class IconConfigurable: SearchableConfigurable {
     override fun getDisplayName(): String = "Icon Customizer"
 
     override fun getId(): String = "dev.priporov.customicons.settings.IconConfigurable"
+
+    override fun cancel() {
+        super.cancel()
+    }
+
+    override fun reset() {
+        service<SettingsDialog>().repaintPatternPanel()
+        super.reset()
+    }
 }

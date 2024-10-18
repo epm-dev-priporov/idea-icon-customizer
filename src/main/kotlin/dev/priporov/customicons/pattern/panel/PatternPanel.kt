@@ -20,7 +20,8 @@ import javax.swing.event.DocumentListener
 class PatternPanel {
     lateinit var root: JPanel
     private object State{
-         val editNewPatternActions = ArrayList<EditNewPatternAction>()
+         val actionListeners = ArrayList<ActionListener>()
+         val documentListener = ArrayList<DocumentListener>()
     }
     private lateinit var conditionField: JTextField
     private lateinit var disabledCheckBox: JCheckBox
@@ -46,7 +47,7 @@ class PatternPanel {
         saveButton.isVisible = true
         saveButton.isEnabled = false
 
-        saveButton.addActionListener(CreateNewPatternAction(this, conditionFieldEditingAction))
+        saveButton.addActionListener(SaveNewPatternAction(this, conditionFieldEditingAction))
         iconButton.addActionListener(ChooseIconAction(this))
 
         conditionField.document.addDocumentListener(conditionFieldEditingAction)
@@ -56,27 +57,55 @@ class PatternPanel {
         iconButton.setIcon(item.icon)
 
         conditionField.text = item.condition
-        conditionField.document.addDocumentListener(ConditionFieldEditingAction(this, applyButton, item.condition))
 
         conditionTypeBox.selectedItem = item.conditionType
         fileTypeBox.selectedItem = item.fileType
 
         imageIconPanel.isVisible
-
+        disabledCheckBox.isSelected = item.disabled
         root.isVisible = true
         cancelButton.isVisible = false
         saveButton.isVisible = false
         applyButton.isVisible = true
         applyButton.isEnabled = false
 
-        val editNewPatternAction = EditNewPatternAction(this, item)
-        State.editNewPatternActions.apply {
-            forEach { applyButton.removeActionListener(it) }
+        val conditionFieldEditingAction = ConditionFieldEditingAction(this, applyButton, item.condition)
+        State.documentListener.apply {
+            forEach { conditionField.document.removeDocumentListener(it) }
             clear()
-            add(editNewPatternAction)
+            add(conditionFieldEditingAction)
         }
 
+        initListeners(item, conditionFieldEditingAction)
+    }
+
+    private fun initListeners(
+        item: BaseConditionItem,
+        conditionFieldEditingAction: ConditionFieldEditingAction
+    ) {
+        val fileTypeAction = FileTypeAction(this, item)
+        val conditionTypeAction = ConditionTypeAction(this, item)
+        val editNewPatternAction = EditNewPatternAction(this, item)
+        val checkboxIconAction = CheckboxIconAction(this, item)
+        State.actionListeners.apply {
+            forEach {
+                applyButton.removeActionListener(it)
+                disabledCheckBox.removeActionListener(it)
+                conditionTypeBox.removeActionListener(it)
+                fileTypeBox.removeActionListener(it)
+            }
+            clear()
+            add(editNewPatternAction)
+            add(checkboxIconAction)
+            add(conditionTypeAction)
+            add(fileTypeAction)
+        }
+
+        conditionField.document.addDocumentListener(conditionFieldEditingAction)
+        disabledCheckBox.addActionListener(checkboxIconAction)
         applyButton.addActionListener(editNewPatternAction)
+        conditionTypeBox.addActionListener(conditionTypeAction)
+        fileTypeBox.addActionListener(fileTypeAction)
     }
 
     fun setCancelAction(action: ActionListener) {
@@ -102,7 +131,7 @@ class PatternPanel {
         return item
     }
 
-    private class CreateNewPatternAction(
+    private class SaveNewPatternAction(
         private val patternPanel: PatternPanel,
         private val editingAction: ConditionFieldEditingAction
     ) : ActionListener {
@@ -132,11 +161,13 @@ class PatternPanel {
             item.condition = patternPanel.conditionField.text
             item.fileType = patternPanel.fileTypeBox.selectedItem as FileType
             item.conditionType = patternPanel.conditionTypeBox.selectedItem as ConditionType
-            item.active = !patternPanel.disabledCheckBox.isSelected
+            item.disabled = !patternPanel.disabledCheckBox.isSelected
             item.icon = patternPanel.selectedIcon
 
             service<SettingsListModelService>().reload()
 
+            patternPanel.applyButton.isEnabled = false
+            
             updateProjectViewStructure()
         }
     }
@@ -159,7 +190,7 @@ class PatternPanel {
             button.isEnabled = hasTextDifference()
         }
 
-        private fun hasTextDifference() = itemCondition != panel.conditionField.text
+        private fun hasTextDifference() = (panel.conditionField.text != itemCondition)
     }
 
     private class ChooseIconAction(
@@ -201,6 +232,33 @@ class PatternPanel {
                 }
                 return@withFileFilter true
             }
+        }
+    }
+
+    private class CheckboxIconAction(
+        private val patternPanel: PatternPanel,
+        private val item: BaseConditionItem
+    ) : ActionListener {
+        override fun actionPerformed(e: ActionEvent?) {
+            patternPanel.applyButton.isEnabled = (patternPanel.disabledCheckBox.isSelected != item.disabled)
+        }
+    }
+
+    private class ConditionTypeAction(
+        private val patternPanel: PatternPanel,
+        private val item: BaseConditionItem
+    ) : ActionListener {
+        override fun actionPerformed(e: ActionEvent?) {
+            patternPanel.applyButton.isEnabled = patternPanel.conditionTypeBox.selectedItem != item.conditionType
+        }
+    }
+
+    private class FileTypeAction(
+        private val patternPanel: PatternPanel,
+        private val item: BaseConditionItem
+    ) : ActionListener {
+        override fun actionPerformed(e: ActionEvent?) {
+            patternPanel.applyButton.isEnabled = patternPanel.fileTypeBox.selectedItem != item.fileType
         }
     }
 

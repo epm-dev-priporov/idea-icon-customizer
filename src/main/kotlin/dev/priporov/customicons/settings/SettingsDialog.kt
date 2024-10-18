@@ -53,6 +53,13 @@ class SettingsDialog {
         patternPanel.root.isVisible = false
     }
 
+    fun repaintPatternPanel(){
+        val selectedValue = list.selectedValue
+        if(selectedValue != null){
+            patternPanel.showSelectedItem(selectedValue)
+        }
+    }
+
 }
 
 private class CustomListCellRenderer() : DefaultListCellRenderer() {
