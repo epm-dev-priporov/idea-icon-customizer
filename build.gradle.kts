@@ -5,7 +5,8 @@ plugins {
 }
 
 group = "dev.priporov"
-version = "1.0-SNAPSHOT"
+version = "0.9.0"
+//"icon-customizer"
 
 repositories {
     mavenCentral()

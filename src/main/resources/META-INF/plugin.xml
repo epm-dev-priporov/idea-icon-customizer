@@ -15,7 +15,7 @@
     <depends>org.jetbrains.kotlin</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <iconProvider implementation="dev.priporov.customicons.IconCustomizerExtension"/>
+        <projectViewNodeDecorator implementation="dev.priporov.customicons.extension.ProjectViewIconNodeDecorator"/>
         <applicationConfigurable displayName="Icon Customizer"
                                  instance="dev.priporov.customicons.settings.IconConfigurable"/>
     </extensions>
