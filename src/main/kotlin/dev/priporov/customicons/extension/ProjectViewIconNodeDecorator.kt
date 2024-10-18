@@ -28,23 +28,25 @@ class ProjectViewIconNodeDecorator : ProjectViewNodeDecorator {
         val name = text.substringBeforeLast(".")
         val extension = text.substringAfterLast(".")
 
-        items.forEach { item ->
-            if(item.fileType == FileType.FOLDER){
-                if (value is PsiJavaDirectoryImpl || value is PsiDirectoryImpl) {
-                    getIcon(item, name, extension)?.also {
-                        presentationData.setIcon(it)
+        items.asSequence()
+            .filterNot { it.disabled }
+            .forEach { item ->
+                if (item.fileType == FileType.FOLDER) {
+                    if (value is PsiJavaDirectoryImpl || value is PsiDirectoryImpl) {
+                        getIcon(item, name, extension)?.also {
+                            presentationData.setIcon(it)
 
+                        }
+                    }
+                }
+                if (item.fileType == FileType.FILE) {
+                    if (value is PsiClassImpl || value is PsiFileImpl) {
+                        getIcon(item, name, extension)?.also {
+                            presentationData.setIcon(it)
+                        }
                     }
                 }
             }
-            if(item.fileType == FileType.FILE){
-                if (value is PsiClassImpl || value is PsiFileImpl) {
-                    getIcon(item, name, extension)?.also {
-                        presentationData.setIcon(it)
-                    }
-                }
-            }
-        }
     }
 
     fun getIcon(item: BaseConditionItem, name: String, extension: String?): Icon? {

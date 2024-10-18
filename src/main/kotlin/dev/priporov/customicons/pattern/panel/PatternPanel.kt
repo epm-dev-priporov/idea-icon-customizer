@@ -161,7 +161,7 @@ class PatternPanel {
             item.condition = patternPanel.conditionField.text
             item.fileType = patternPanel.fileTypeBox.selectedItem as FileType
             item.conditionType = patternPanel.conditionTypeBox.selectedItem as ConditionType
-            item.disabled = !patternPanel.disabledCheckBox.isSelected
+            item.disabled = patternPanel.disabledCheckBox.isSelected
             item.icon = patternPanel.selectedIcon
 
             service<SettingsListModelService>().reload()
