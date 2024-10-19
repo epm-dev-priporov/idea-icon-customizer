@@ -53,25 +53,25 @@ class ProjectViewIconNodeDecorator : ProjectViewNodeDecorator {
         when (item.conditionType) {
             ConditionType.REGEXP -> {
                 if (Regex(item.condition).matches(name)) {
-                    return item.icon
+                    return item.iconContainer?.icon
                 }
             }
 
             ConditionType.EQUALS -> {
                 if (name.equals(item.condition)) {
-                    return item.icon
+                    return item.iconContainer?.icon
                 }
             }
 
             ConditionType.CONTAINS -> {
                 if (name.contains(item.condition)) {
-                    return item.icon
+                    return item.iconContainer?.icon
                 }
             }
 
             ConditionType.EXTENSION_EQUALS -> {
                 if (extension == item.condition) {
-                    return item.icon
+                    return item.iconContainer?.icon
                 }
             }
         }

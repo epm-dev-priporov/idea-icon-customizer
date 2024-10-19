@@ -73,8 +73,8 @@ private class CustomListCellRenderer() : DefaultListCellRenderer() {
 
         return (super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus) as JLabel).apply {
             val item = value as BaseConditionItem
-            if(item.icon != null) {
-                setIcon(item.icon)
+            if(item.iconContainer != null) {
+                setIcon(item.iconContainer?.icon)
             }
         }
     }

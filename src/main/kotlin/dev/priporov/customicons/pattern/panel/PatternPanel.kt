@@ -33,7 +33,7 @@ class PatternPanel {
     private lateinit var iconButton: JButton
     private lateinit var imageIconPanel: JPanel
 
-    private var selectedIcon: ImageIcon? = null
+    private var selectedIcon: IconContainer? = null
     private val conditionFieldEditingAction = ConditionFieldEditingAction(this, saveButton, conditionField.text)
 
     init {
@@ -54,7 +54,7 @@ class PatternPanel {
     }
 
     fun showSelectedItem(item: BaseConditionItem) {
-        iconButton.setIcon(item.icon)
+        iconButton.setIcon(item.iconContainer?.icon)
 
         conditionField.text = item.condition
 
@@ -126,7 +126,7 @@ class PatternPanel {
             ConditionType.EXTENSION_EQUALS -> ExtensionEqualsPatternItem(condition)
         }
         item.fileType = fileType
-        item.icon = selectedIcon
+        item.iconContainer = selectedIcon
 
         return item
     }
@@ -162,7 +162,7 @@ class PatternPanel {
             item.fileType = patternPanel.fileTypeBox.selectedItem as FileType
             item.conditionType = patternPanel.conditionTypeBox.selectedItem as ConditionType
             item.disabled = patternPanel.disabledCheckBox.isSelected
-            item.icon = patternPanel.selectedIcon
+            item.iconContainer = patternPanel.selectedIcon
 
             service<SettingsListModelService>().reload()
 
@@ -205,8 +205,8 @@ class PatternPanel {
                     if (conditionField.text.isNotEmpty()) {
                         applyButton.isEnabled = true
                     }
-                    selectedIcon = ImageIcon(file.path)
-                    iconButton.setIcon(selectedIcon)
+                    selectedIcon = IconContainer(ImageIcon(file.path), file.path)
+                    iconButton.setIcon(selectedIcon?.icon)
                 }
 
             }
