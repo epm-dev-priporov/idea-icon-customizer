@@ -6,7 +6,7 @@ import javax.swing.ImageIcon
 
 class ConditionState {
 
-    private val items = HashMap<String, ConditionItemInfo>()
+    var items = HashMap<String, ConditionItemInfo>()
 
     fun addItemInfo(item: BaseConditionItem) {
         val info = ConditionItemInfo(

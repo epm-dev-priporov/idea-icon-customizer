@@ -14,7 +14,7 @@ import javax.swing.DefaultListModel
 )
 class SettingsListModelService : DefaultListModel<BaseConditionItem>(), PersistentStateComponent<ConditionState> {
 
-    private val state = ConditionState()
+    private var state = ConditionState()
 
     override fun addElement(element: BaseConditionItem) {
         super.addElement(element)
@@ -42,7 +42,8 @@ class SettingsListModelService : DefaultListModel<BaseConditionItem>(), Persiste
         return state
     }
 
-    override fun loadState(state: ConditionState) {
+    override fun loadState(loadedState: ConditionState) {
+        state = loadedState
         state.getItems().forEach { addElement(it) }
     }
 
