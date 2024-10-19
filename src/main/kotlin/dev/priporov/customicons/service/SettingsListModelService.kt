@@ -1,10 +1,10 @@
 package dev.priporov.customicons.service
 
 import com.intellij.openapi.components.*
+import dev.priporov.customicons.icon.IconImporter
 import dev.priporov.customicons.pattern.item.BaseConditionItem
 import dev.priporov.customicons.settings.SettingsDialog
-import dev.priporov.customicons.state.ConditionState
-import org.jetbrains.kotlin.idea.kdoc.each
+import dev.priporov.customicons.state.PluginState
 import javax.swing.DefaultListModel
 
 @Service
@@ -12,9 +12,9 @@ import javax.swing.DefaultListModel
     name = "StateService",
     storages = [Storage("icon-customizer.xml")]
 )
-class SettingsListModelService : DefaultListModel<BaseConditionItem>(), PersistentStateComponent<ConditionState> {
+class SettingsListModelService : DefaultListModel<BaseConditionItem>(), PersistentStateComponent<PluginState> {
 
-    private var state = ConditionState()
+    private var state = PluginState()
 
     override fun addElement(element: BaseConditionItem) {
         super.addElement(element)
@@ -38,13 +38,17 @@ class SettingsListModelService : DefaultListModel<BaseConditionItem>(), Persiste
 
     fun getItems() = elements().asSequence().toList()
 
-    override fun getState(): ConditionState {
+    override fun getState(): PluginState {
         return state
     }
 
-    override fun loadState(loadedState: ConditionState) {
+    override fun loadState(loadedState: PluginState) {
         state = loadedState
         state.getItems().forEach { addElement(it) }
+        if(state.requiredImport){
+            service<IconImporter>().import()
+            state.requiredImport = false
+        }
     }
 
 }

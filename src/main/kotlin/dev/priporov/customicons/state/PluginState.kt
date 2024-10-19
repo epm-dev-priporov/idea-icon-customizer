@@ -4,7 +4,9 @@ import dev.priporov.customicons.pattern.item.BaseConditionItem
 import dev.priporov.customicons.pattern.item.IconContainer
 import javax.swing.ImageIcon
 
-class ConditionState {
+class PluginState {
+
+    var requiredImport = true;
 
     var items = HashMap<String, ConditionItemInfo>()
 
