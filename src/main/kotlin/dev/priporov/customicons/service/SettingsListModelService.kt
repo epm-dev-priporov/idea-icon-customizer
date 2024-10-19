@@ -45,10 +45,7 @@ class SettingsListModelService : DefaultListModel<BaseConditionItem>(), Persiste
     override fun loadState(loadedState: PluginState) {
         state = loadedState
         state.getItems().forEach { addElement(it) }
-        if(state.requiredImport){
-            service<IconImporter>().import()
-            state.requiredImport = false
-        }
+//        service<IconImporter>().import()
     }
 
 }

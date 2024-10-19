@@ -6,8 +6,6 @@ import javax.swing.ImageIcon
 
 class PluginState {
 
-    var requiredImport = true;
-
     var items = HashMap<String, ConditionItemInfo>()
 
     fun addItemInfo(item: BaseConditionItem) {
