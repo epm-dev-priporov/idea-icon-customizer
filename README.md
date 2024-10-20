@@ -4,6 +4,8 @@ This simple plugin allows you to use customize icons in Project View. You can us
 icons or your own. Icons will be applied based on a pattern by name, like you class contains "Repository" in it
 is name or your directory called docker.
 
+https://github.com/epm-dev-priporov/idea-icon-customizer/blob/master/img.png?raw=true
+
 **Supported patterns**:
 
 * contains
