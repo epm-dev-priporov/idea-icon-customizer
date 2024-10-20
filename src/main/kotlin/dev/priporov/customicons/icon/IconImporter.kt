@@ -1,6 +1,10 @@
 package dev.priporov.customicons.icon
 
+import com.intellij.openapi.application.ApplicationActivationListener
 import com.intellij.openapi.components.Service
+import com.intellij.openapi.wm.IdeFrame
+import dev.priporov.customicons.state.PluginState
+import org.apache.commons.lang.StringUtils
 import java.io.File
 import java.lang.invoke.MethodHandles
 import java.nio.file.FileSystems
@@ -9,23 +13,39 @@ import java.nio.file.Path
 import kotlin.io.path.extension
 
 @Service
-class IconImporter {
+class IconImporter : ApplicationActivationListener {
+
+    // load icons on the first start
+    override fun applicationActivated(ideFrame: IdeFrame) {
+        val file = File(iconDir)
+        if (!file.exists()) {
+            file.mkdir()
+            import("0")
+        }
+    }
 
     private val fileSeparator: String = FileSystems.getDefault().getSeparator() ?: File.pathSeparator
 
     val iconDir = "${System.getProperty("user.home")}${fileSeparator}.ideaIconCustomizer"
 
-    fun import() {
+    fun import(version: String) {
+        if (StringUtils.equals(version, PluginState.Icon.CURRENT_VERSION)) {
+            return
+        }
         val file = File(iconDir)
         if (!file.exists()) {
             file.mkdir()
         }
+
         val resourceDir = "/icons"
         val lookupClass = MethodHandles.lookup().lookupClass()
         val resource = lookupClass.getResource(resourceDir)
 
-        val paths: MutableList<Path> =
-            FileSystems.newFileSystem(resource.toURI(), emptyMap<String, String>()).use { fs ->
+        val paths: MutableList<Path> = FileSystems.newFileSystem(
+            resource.toURI(),
+            emptyMap<String, String>()
+        )
+            .use { fs ->
                 Files.walk(fs.getPath(resourceDir)).toList()
             }
         paths.map {
@@ -44,10 +64,6 @@ class IconImporter {
                 }
                 newIcon.writeBytes(bytes)
             }
-
         }
-
-
     }
-
 }

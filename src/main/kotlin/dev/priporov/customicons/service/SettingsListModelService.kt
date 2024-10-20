@@ -47,10 +47,9 @@ class SettingsListModelService : DefaultListModel<BaseConditionItem>(), Persiste
         state = loadedState
         state.getItems().forEach { addElement(it) }
 
-        if (!StringUtils.equals(state.versionIcon, PluginState.Icon.CURRENT_VERSION)) {
-            service<IconImporter>().import()
-            state.versionIcon = PluginState.Icon.CURRENT_VERSION
-        }
+        service<IconImporter>().import(state.versionIcon)
+
+        state.versionIcon = PluginState.Icon.CURRENT_VERSION
     }
 
 }

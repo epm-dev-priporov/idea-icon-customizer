@@ -13,8 +13,11 @@
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.modules.java</depends>
     <depends>org.jetbrains.kotlin</depends>
-
+    <applicationListeners>
+        <listener class="dev.priporov.customicons.icon.IconImporter" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
+    </applicationListeners>
     <extensions defaultExtensionNs="com.intellij">
+
         <projectViewNodeDecorator implementation="dev.priporov.customicons.extension.ProjectViewIconNodeDecorator"/>
         <applicationConfigurable displayName="Icon Customizer"
                                  instance="dev.priporov.customicons.settings.IconConfigurable"/>
