@@ -16,7 +16,6 @@ class IconImporter {
     val iconDir = "${System.getProperty("user.home")}${fileSeparator}.ideaIconCustomizer"
 
     fun import() {
-
         val file = File(iconDir)
         if (!file.exists()) {
             file.mkdir()

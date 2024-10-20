@@ -264,7 +264,7 @@ class PatternPanel {
 
 }
 
-private fun updateProjectViewStructure() {
+fun updateProjectViewStructure() {
     ProjectManager.getInstance().openProjects.forEach { project ->
         ProjectView.getInstance(project)?.refresh()
     }

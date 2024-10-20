@@ -6,6 +6,7 @@ import com.intellij.ui.AnActionButton
 import com.intellij.ui.AnActionButtonRunnable
 import com.intellij.ui.ToolbarDecorator
 import dev.priporov.customicons.pattern.panel.PatternPanel
+import dev.priporov.customicons.pattern.panel.updateProjectViewStructure
 import dev.priporov.customicons.service.SettingsListModelService
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
@@ -22,8 +23,9 @@ object PatternItemsToolbarFactory {
         })
         decorator.setRemoveAction(ToolbarAction {
             val selectedValue = list.selectedValue
-            if(selectedValue != null) {
-               service<SettingsListModelService>().removeElement(selectedValue)
+            if (selectedValue != null) {
+                service<SettingsListModelService>().removeElement(selectedValue)
+                updateProjectViewStructure()
             }
         })
 
@@ -56,7 +58,7 @@ class OkDialog(
 
     override fun createCenterPanel(): JComponent = patternPanel.root
 
-    class DialogCloseAction(private val dialog:OkDialog): ActionListener {
+    class DialogCloseAction(private val dialog: OkDialog) : ActionListener {
 
         override fun actionPerformed(e: ActionEvent?) {
             dialog.close(CLOSE_EXIT_CODE)

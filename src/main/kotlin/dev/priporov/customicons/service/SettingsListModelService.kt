@@ -5,6 +5,7 @@ import dev.priporov.customicons.icon.IconImporter
 import dev.priporov.customicons.pattern.item.BaseConditionItem
 import dev.priporov.customicons.settings.SettingsDialog
 import dev.priporov.customicons.state.PluginState
+import org.apache.commons.lang.StringUtils
 import javax.swing.DefaultListModel
 
 @Service
@@ -45,7 +46,11 @@ class SettingsListModelService : DefaultListModel<BaseConditionItem>(), Persiste
     override fun loadState(loadedState: PluginState) {
         state = loadedState
         state.getItems().forEach { addElement(it) }
-//        service<IconImporter>().import()
+
+        if (!StringUtils.equals(state.versionIcon, PluginState.Icon.CURRENT_VERSION)) {
+            service<IconImporter>().import()
+            state.versionIcon = PluginState.Icon.CURRENT_VERSION
+        }
     }
 
 }
