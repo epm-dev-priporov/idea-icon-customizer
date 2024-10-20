@@ -17,4 +17,5 @@ I would really appreciate if you star the plugin.Also I would really appreciate 
 **Contribution:**
 
 Feel free to share your ideas, write code and share icons.
-To do that just fork the repo, add icons to resource folder and open PR.
+
+To add icons that just fork the repo, add icons to resource folder and open PR.

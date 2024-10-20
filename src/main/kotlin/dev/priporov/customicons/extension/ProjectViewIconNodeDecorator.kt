@@ -3,6 +3,7 @@ package dev.priporov.customicons.extension
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.ide.projectView.ProjectViewNode
 import com.intellij.ide.projectView.ProjectViewNodeDecorator
+import com.intellij.ide.projectView.impl.nodes.PsiFileNode
 import com.intellij.openapi.components.service
 import com.intellij.psi.impl.file.PsiDirectoryImpl
 import com.intellij.psi.impl.file.PsiJavaDirectoryImpl
@@ -41,7 +42,7 @@ class ProjectViewIconNodeDecorator : ProjectViewNodeDecorator {
                     }
                 }
                 if (item.fileType == FileType.FILE) {
-                    if (value is PsiClassImpl || value is PsiFileImpl  || value is KtClass) {
+                    if (value is PsiClassImpl || value is PsiFileImpl || value is KtClass || value is PsiFileNode) {
                         getIcon(item, name, extension)?.also {
                             presentationData.setIcon(it)
                         }
