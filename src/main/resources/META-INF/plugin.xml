@@ -1,7 +1,7 @@
 
 <idea-plugin>
     <id>dev.priporov.custom-icons</id>
-    <name>Custom-icons</name>
+    <name>Icon-Customizer</name>
     <vendor email="devpriporov@mail.ru" url="https://github.com/epm-dev-priporov">Dmitrii Priporov</vendor>
     <description><![CDATA[
         <p> This simple plugin allows you to use customize icons in Project View. You can use a little set of embedded
@@ -15,6 +15,10 @@
             <li>regex</li>
             <li>extension</li>
         </ul>
+
+        <p>
+            <img src="https://github.com/epm-dev-priporov/idea-icon-customizer/blob/master/img.png?raw=true">
+        </p>
 
         <p>The plugins will be improved in case of good feedback, so please don't hesitate and star the plugin.
         I would really appreciate if you star the plugin. The plugin page <a href="https://github.com/epm-dev-priporov/idea-icon-customizer"> github.</a></p>
