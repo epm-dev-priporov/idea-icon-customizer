@@ -4,8 +4,23 @@
     <name>Custom-icons</name>
     <vendor email="devpriporov@mail.ru" url="https://github.com/epm-dev-priporov">Dmitrii Priporov</vendor>
     <description><![CDATA[
+        <p> This simple plugin allows you to use customize icons in Project View. You can use a little set of embedded
+        icons or your own. Icons will be applied based on a pattern by name, like you class contains "Repository" in it
+        is name or your directory called docker.
 
+        <p>Supported patterns</p>
+        <ul>
+            <li>contains</li>
+            <li>equals</li>
+            <li>regex</li>
+            <li>extension</li>
+        </ul>
 
+        <p>The plugins will be improved in case of good feedback, so please don't hesitate and star the plugin.
+        I would really appreciate if you star the plugin. The plugin page <a href="https://github.com/epm-dev-priporov/idea-notes"> github.</a></p>
+
+        <p>Also I would really appreciate if you contribute. Feel free to share your ideas, write code and share icons.
+        To do that just fork the repo, add icons to resource folder and open PR.
       ]]>
     </description>
 

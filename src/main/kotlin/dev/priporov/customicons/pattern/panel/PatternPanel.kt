@@ -5,6 +5,9 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.fileChooser.FileChooser
 import com.intellij.openapi.fileChooser.FileChooserDescriptor
 import com.intellij.openapi.project.ProjectManager
+import com.intellij.openapi.vfs.LocalFileSystem
+import com.intellij.openapi.vfs.VirtualFile
+import dev.priporov.customicons.icon.ICON_DIR
 import dev.priporov.customicons.pattern.common.ConditionType
 import dev.priporov.customicons.pattern.common.FileType
 import dev.priporov.customicons.pattern.item.*
@@ -12,6 +15,7 @@ import dev.priporov.customicons.service.SettingsListModelService
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import java.awt.image.BufferedImage
+import java.io.File
 import javax.imageio.ImageIO
 import javax.swing.*
 import javax.swing.event.DocumentEvent
@@ -19,10 +23,12 @@ import javax.swing.event.DocumentListener
 
 class PatternPanel {
     lateinit var root: JPanel
-    private object State{
-         val actionListeners = ArrayList<ActionListener>()
-         val documentListener = ArrayList<DocumentListener>()
+
+    private object State {
+        val actionListeners = ArrayList<ActionListener>()
+        val documentListener = ArrayList<DocumentListener>()
     }
+
     private lateinit var conditionField: JTextField
     private lateinit var disabledCheckBox: JCheckBox
     private lateinit var conditionTypeBox: JComboBox<ConditionType>
@@ -167,7 +173,7 @@ class PatternPanel {
             service<SettingsListModelService>().reload()
 
             patternPanel.applyButton.isEnabled = false
-            
+
             updateProjectViewStructure()
         }
     }
@@ -200,7 +206,7 @@ class PatternPanel {
 
         override fun actionPerformed(e: ActionEvent?) {
             val descriptor = fileChooserDescriptor()
-            FileChooser.chooseFile(descriptor, null, null)?.also { file ->
+            FileChooser.chooseFile(descriptor, null, createVirtualFile(File(ICON_DIR)))?.also { file ->
                 patternPanel.apply {
                     if (conditionField.text.isNotEmpty()) {
                         applyButton.isEnabled = true
@@ -268,4 +274,14 @@ fun updateProjectViewStructure() {
     ProjectManager.getInstance().openProjects.forEach { project ->
         ProjectView.getInstance(project)?.refresh()
     }
+}
+
+private fun createVirtualFile(file: File): VirtualFile? {
+    val localFileSystem = LocalFileSystem
+        .getInstance()
+    val path = file.toPath()
+
+    return localFileSystem.refreshAndFindFileByNioFile(path)
+        ?: localFileSystem.refreshAndFindFileByIoFile(file)
+        ?: localFileSystem.refreshAndFindFileByPath(path.toString())
 }

@@ -12,32 +12,32 @@ import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.io.path.extension
 
+val FILE_SEPARATOR: String = FileSystems.getDefault().getSeparator() ?: File.pathSeparator
+val PLUGIN_DIR = "${System.getProperty("user.home")}${FILE_SEPARATOR}.ideaIconCustomizer"
+val ICON_DIR = "${System.getProperty("user.home")}${FILE_SEPARATOR}.ideaIconCustomizer${FILE_SEPARATOR}icons"
+
 @Service
 class IconImporter : ApplicationActivationListener {
 
     // load icons on the first start
     override fun applicationActivated(ideFrame: IdeFrame) {
-        val file = File(iconDir)
+        val file = File(PLUGIN_DIR)
         if (!file.exists()) {
             file.mkdir()
             import("0")
         }
     }
 
-    private val fileSeparator: String = FileSystems.getDefault().getSeparator() ?: File.pathSeparator
-
-    val iconDir = "${System.getProperty("user.home")}${fileSeparator}.ideaIconCustomizer"
-
     fun import(version: String) {
         if (StringUtils.equals(version, PluginState.Icon.CURRENT_VERSION)) {
             return
         }
-        val file = File(iconDir)
+        val file = File(PLUGIN_DIR)
         if (!file.exists()) {
             file.mkdir()
         }
 
-        val resourceDir = "/icons"
+        val resourceDir = "${FILE_SEPARATOR}icons"
         val lookupClass = MethodHandles.lookup().lookupClass()
         val resource = lookupClass.getResource(resourceDir)
 
@@ -55,7 +55,7 @@ class IconImporter : ApplicationActivationListener {
 
             lookupClass.getResourceAsStream(it.toString())?.readAllBytes()?.also { bytes ->
 
-                val newIcon = File("$iconDir$it")
+                val newIcon = File("$PLUGIN_DIR$it")
                 if (!newIcon.parentFile.exists()) {
                     newIcon.parentFile.mkdirs()
                 }
