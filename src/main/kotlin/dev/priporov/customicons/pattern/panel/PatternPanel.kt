@@ -123,7 +123,7 @@ class PatternPanel {
             ConditionType.REGEXP -> RegexpPatternItem(condition)
             ConditionType.EQUALS -> EqualsPatternItem(condition)
             ConditionType.CONTAINS -> ContainsPatternItem(condition)
-            ConditionType.EXTENSION_EQUALS -> ExtensionEqualsPatternItem(condition)
+            ConditionType.EXTENSION -> ExtensionEqualsPatternItem(condition)
         }
         item.fileType = fileType
         item.iconContainer = selectedIcon

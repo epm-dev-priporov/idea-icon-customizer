@@ -12,6 +12,7 @@ import dev.priporov.customicons.pattern.common.ConditionType
 import dev.priporov.customicons.pattern.common.FileType
 import dev.priporov.customicons.pattern.item.BaseConditionItem
 import dev.priporov.customicons.service.SettingsListModelService
+import org.jetbrains.kotlin.psi.KtClass
 import javax.swing.Icon
 
 class ProjectViewIconNodeDecorator : ProjectViewNodeDecorator {
@@ -40,7 +41,7 @@ class ProjectViewIconNodeDecorator : ProjectViewNodeDecorator {
                     }
                 }
                 if (item.fileType == FileType.FILE) {
-                    if (value is PsiClassImpl || value is PsiFileImpl) {
+                    if (value is PsiClassImpl || value is PsiFileImpl  || value is KtClass) {
                         getIcon(item, name, extension)?.also {
                             presentationData.setIcon(it)
                         }
@@ -69,7 +70,7 @@ class ProjectViewIconNodeDecorator : ProjectViewNodeDecorator {
                 }
             }
 
-            ConditionType.EXTENSION_EQUALS -> {
+            ConditionType.EXTENSION -> {
                 if (extension == item.condition) {
                     return item.iconContainer?.icon
                 }
