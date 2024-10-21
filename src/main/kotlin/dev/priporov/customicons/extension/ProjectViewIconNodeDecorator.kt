@@ -37,7 +37,6 @@ class ProjectViewIconNodeDecorator : ProjectViewNodeDecorator {
                     if (value is PsiJavaDirectoryImpl || value is PsiDirectoryImpl) {
                         getIcon(item, name, extension)?.also {
                             presentationData.setIcon(it)
-
                         }
                     }
                 }

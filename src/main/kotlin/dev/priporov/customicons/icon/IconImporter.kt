@@ -4,7 +4,6 @@ import com.intellij.openapi.application.ApplicationActivationListener
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.wm.IdeFrame
 import dev.priporov.customicons.state.PluginState
-import org.apache.commons.lang.StringUtils
 import java.io.File
 import java.lang.invoke.MethodHandles
 import java.nio.file.FileSystems
@@ -29,7 +28,7 @@ class IconImporter : ApplicationActivationListener {
     }
 
     fun import(version: String) {
-        if (StringUtils.equals(version, PluginState.Icon.CURRENT_VERSION)) {
+        if (PluginState.Icon.CURRENT_VERSION.equals(version)) {
             return
         }
         val file = File(PLUGIN_DIR)

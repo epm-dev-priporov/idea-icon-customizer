@@ -202,7 +202,7 @@ class PatternPanel {
     private class ChooseIconAction(
         private val patternPanel: PatternPanel,
     ) : ActionListener {
-        private val extensions = setOf("png", "jpg", "jpeg", "svg")
+        private val extensions = setOf("png", "jpg", "jpeg")
 
         override fun actionPerformed(e: ActionEvent?) {
             val descriptor = fileChooserDescriptor()

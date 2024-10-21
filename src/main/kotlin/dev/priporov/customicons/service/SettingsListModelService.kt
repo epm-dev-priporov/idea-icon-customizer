@@ -5,7 +5,6 @@ import dev.priporov.customicons.icon.IconImporter
 import dev.priporov.customicons.pattern.item.BaseConditionItem
 import dev.priporov.customicons.settings.SettingsDialog
 import dev.priporov.customicons.state.PluginState
-import org.apache.commons.lang.StringUtils
 import javax.swing.DefaultListModel
 
 @Service

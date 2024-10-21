@@ -4,12 +4,15 @@ import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.ui.CollectionListModel
 import com.intellij.ui.components.JBList
-import dev.priporov.customicons.pattern.item.*
+import dev.priporov.customicons.pattern.item.BaseConditionItem
 import dev.priporov.customicons.pattern.panel.PatternPanel
 import dev.priporov.customicons.service.SettingsListModelService
 import java.awt.Component
 import java.awt.GridLayout
-import javax.swing.*
+import javax.swing.DefaultListCellRenderer
+import javax.swing.JLabel
+import javax.swing.JList
+import javax.swing.JPanel
 
 
 @Service

@@ -2,9 +2,7 @@ package dev.priporov.customicons.state
 
 import dev.priporov.customicons.pattern.item.BaseConditionItem
 import dev.priporov.customicons.pattern.item.IconContainer
-import org.jetbrains.kotlin.config.KotlinFacetSettings.Companion.CURRENT_VERSION
 import javax.swing.ImageIcon
-
 
 
 class PluginState {
