@@ -9,7 +9,7 @@ import javax.swing.DefaultListModel
 
 @Service
 @State(
-    name = "StateService",
+    name = "dev.priporov.customicons.service.SettingsListModelService",
     storages = [Storage("icon-customizer.xml")]
 )
 class SettingsListModelService : DefaultListModel<BaseConditionItem>(), PersistentStateComponent<PluginState> {

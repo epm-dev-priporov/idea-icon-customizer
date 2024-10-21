@@ -5,8 +5,7 @@ import com.intellij.ide.projectView.ProjectViewNode
 import com.intellij.ide.projectView.ProjectViewNodeDecorator
 import com.intellij.ide.projectView.impl.nodes.PsiFileNode
 import com.intellij.openapi.components.service
-import com.intellij.psi.impl.file.PsiDirectoryImpl
-import com.intellij.psi.impl.file.PsiJavaDirectoryImpl
+import com.intellij.psi.PsiDirectory
 import com.intellij.psi.impl.source.PsiClassImpl
 import com.intellij.psi.impl.source.PsiFileImpl
 import dev.priporov.customicons.pattern.common.ConditionType
@@ -34,13 +33,12 @@ class ProjectViewIconNodeDecorator : ProjectViewNodeDecorator {
             .filterNot { it.disabled }
             .forEach { item ->
                 if (item.fileType == FileType.FOLDER) {
-                    if (value is PsiJavaDirectoryImpl || value is PsiDirectoryImpl) {
+                    if (value is PsiDirectory) {
                         getIcon(item, name, extension)?.also {
                             presentationData.setIcon(it)
                         }
                     }
-                }
-                if (item.fileType == FileType.FILE) {
+                } else if (item.fileType == FileType.FILE) {
                     if (value is PsiClassImpl || value is PsiFileImpl || value is KtClass || value is PsiFileNode) {
                         getIcon(item, name, extension)?.also {
                             presentationData.setIcon(it)
