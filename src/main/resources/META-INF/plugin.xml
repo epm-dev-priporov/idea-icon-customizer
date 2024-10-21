@@ -33,6 +33,11 @@
     <applicationListeners>
         <listener class="dev.priporov.customicons.icon.IconImporter" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
     </applicationListeners>
+
+    <extensions defaultExtensionNs="org.jetbrains.kotlin">
+        <supportsKotlinPluginMode supportsK2="true" />
+    </extensions>
+
     <extensions defaultExtensionNs="com.intellij">
 
         <projectViewNodeDecorator implementation="dev.priporov.customicons.extension.ProjectViewIconNodeDecorator"/>

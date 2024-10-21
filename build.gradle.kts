@@ -1,24 +1,31 @@
 plugins {
     id("java")
+    id("org.jetbrains.intellij.platform") version "2.1.0"
     id("org.jetbrains.kotlin.jvm") version "1.9.25"
-    id("org.jetbrains.intellij") version "1.17.4"
 }
 
 group = "dev.priporov"
-version = "0.9.1"
+version = "0.9.2"
 //"icon-customizer"
 
 repositories {
     mavenCentral()
+    maven("https://oss.sonatype.org/content/repositories/snapshots/")
+    gradlePluginPortal()
+
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
-// Configure Gradle IntelliJ Plugin
-// Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
-intellij {
-    version.set("2024.1.2")
-    type.set("IC") // Target IDE Platform
+dependencies {
+    intellijPlatform {
+        intellijIdeaCommunity("2024.2.3")
 
-    plugins.set(listOf("java", "Kotlin"))
+        instrumentationTools()
+        bundledPlugin("com.intellij.java")
+        bundledPlugin("org.jetbrains.kotlin")
+    }
 }
 
 tasks {
