@@ -28,7 +28,7 @@ class IconImporter : ApplicationActivationListener {
         }
     }
 
-    fun import(version: String) {
+    fun import(version: String?) {
         if (Icon.VERSION.equals(version)) {
             return
         }

@@ -170,6 +170,7 @@ class PatternPanel {
             item.disabled = patternPanel.disabledCheckBox.isSelected
             item.iconContainer = patternPanel.selectedIcon
 
+            service<SettingsListModelService>().updateElement(item)
             service<SettingsListModelService>().reload()
 
             patternPanel.applyButton.isEnabled = false

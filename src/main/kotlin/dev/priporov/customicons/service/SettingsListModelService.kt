@@ -22,6 +22,10 @@ class SettingsListModelService : DefaultListModel<BaseConditionItem>(), Persiste
         state.addItemInfo(element)
     }
 
+    fun updateElement(element: BaseConditionItem) {
+        state.addItemInfo(element)
+    }
+
     override fun removeElement(item: Any?): Boolean {
         val result = if (item != null && super.contains(item) && item is BaseConditionItem) {
             state.removeInfo(item)

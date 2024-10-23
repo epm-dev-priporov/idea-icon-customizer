@@ -8,8 +8,15 @@ import javax.swing.ImageIcon
 
 class PluginState {
 
-    var versionIcon:String = Icon.VERSION
+    var versionIcon:String? = Icon.VERSION
     var items = HashMap<String, ConditionItemInfo>()
+
+    constructor(versionIcon: String?, items: HashMap<String, ConditionItemInfo>) {
+        this.versionIcon = versionIcon
+        this.items = items
+    }
+
+    constructor()
 
     fun addItemInfo(item: BaseConditionItem) {
         val info = ConditionItemInfo(
@@ -36,6 +43,7 @@ class PluginState {
             .toList()
     }
 
+    @Transient
     private fun toItem(info: ConditionItemInfo): BaseConditionItem {
         return BaseConditionItem(info.condition!!, info.conditionType!!).apply {
             id = info.id!!
@@ -44,4 +52,23 @@ class PluginState {
             disabled = info.disabled
         }
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as PluginState
+
+        if (versionIcon != other.versionIcon) return false
+        if (items != other.items) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = versionIcon?.hashCode() ?: 0
+        result = 31 * result + items.hashCode()
+        return result
+    }
+
 }
