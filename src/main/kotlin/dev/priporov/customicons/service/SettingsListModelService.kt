@@ -4,6 +4,7 @@ import com.intellij.openapi.components.*
 import dev.priporov.customicons.icon.IconImporter
 import dev.priporov.customicons.pattern.item.BaseConditionItem
 import dev.priporov.customicons.settings.SettingsDialog
+import dev.priporov.customicons.state.Icon
 import dev.priporov.customicons.state.PluginState
 import javax.swing.DefaultListModel
 
@@ -43,12 +44,13 @@ class SettingsListModelService : DefaultListModel<BaseConditionItem>(), Persiste
     }
 
     override fun loadState(loadedState: PluginState) {
-        state = loadedState
-        state.getItems().forEach { addElement(it) }
+        loadedState.getItems().forEach { addElement(it) }
 
-        service<IconImporter>().import(state.versionIcon)
+        if(loadedState.versionIcon != Icon.VERSION){
+            service<IconImporter>().import(state.versionIcon)
+        }
 
-        state.versionIcon = PluginState.Icon.CURRENT_VERSION
+        state.versionIcon = Icon.VERSION
     }
 
 }

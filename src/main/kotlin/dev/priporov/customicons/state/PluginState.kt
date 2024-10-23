@@ -1,16 +1,14 @@
 package dev.priporov.customicons.state
 
+import com.intellij.util.xmlb.annotations.Transient
 import dev.priporov.customicons.pattern.item.BaseConditionItem
 import dev.priporov.customicons.pattern.item.IconContainer
 import javax.swing.ImageIcon
 
 
 class PluginState {
-    object Icon {
-        const val CURRENT_VERSION = "1.0.0"
-    }
 
-    var versionIcon:String = Icon.CURRENT_VERSION
+    var versionIcon:String = Icon.VERSION
     var items = HashMap<String, ConditionItemInfo>()
 
     fun addItemInfo(item: BaseConditionItem) {
@@ -30,6 +28,7 @@ class PluginState {
         items.remove(item.id)
     }
 
+    @Transient
     fun getItems(): List<BaseConditionItem> {
         return items.values
             .asSequence()
