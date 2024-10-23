@@ -3,6 +3,7 @@ package dev.priporov.customicons.icon
 import com.intellij.openapi.application.ApplicationActivationListener
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.wm.IdeFrame
+import dev.priporov.customicons.state.Icon
 import dev.priporov.customicons.state.PluginState
 import java.io.File
 import java.lang.invoke.MethodHandles
@@ -28,7 +29,7 @@ class IconImporter : ApplicationActivationListener {
     }
 
     fun import(version: String) {
-        if (PluginState.Icon.CURRENT_VERSION.equals(version)) {
+        if (Icon.VERSION.equals(version)) {
             return
         }
         val file = File(PLUGIN_DIR)

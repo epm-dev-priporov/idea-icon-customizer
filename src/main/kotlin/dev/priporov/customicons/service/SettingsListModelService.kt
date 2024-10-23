@@ -4,6 +4,7 @@ import com.intellij.openapi.components.*
 import dev.priporov.customicons.icon.IconImporter
 import dev.priporov.customicons.pattern.item.BaseConditionItem
 import dev.priporov.customicons.settings.SettingsDialog
+import dev.priporov.customicons.state.Icon
 import dev.priporov.customicons.state.PluginState
 import javax.swing.DefaultListModel
 
@@ -48,7 +49,7 @@ class SettingsListModelService : DefaultListModel<BaseConditionItem>(), Persiste
 
         service<IconImporter>().import(state.versionIcon)
 
-        state.versionIcon = PluginState.Icon.CURRENT_VERSION
+        state.versionIcon = Icon.VERSION
     }
 
 }
