@@ -49,28 +49,37 @@ class ProjectViewIconNodeDecorator : ProjectViewNodeDecorator {
     }
 
     fun getIcon(item: BaseConditionItem, name: String, extension: String?): Icon? {
+        val icon = item.iconContainer?.icon
+
         when (item.conditionType) {
             ConditionType.REGEXP -> {
                 if (Regex(item.condition).matches(name)) {
-                    return item.iconContainer?.icon
+                    return icon
                 }
             }
-
             ConditionType.EQUALS -> {
                 if (name.equals(item.condition)) {
-                    return item.iconContainer?.icon
+                    return icon
                 }
             }
-
             ConditionType.CONTAINS -> {
                 if (name.contains(item.condition)) {
-                    return item.iconContainer?.icon
+                    return icon
                 }
             }
-
             ConditionType.EXTENSION -> {
                 if (extension == item.condition) {
-                    return item.iconContainer?.icon
+                    return icon
+                }
+            }
+            ConditionType.ENDS_WITH -> {
+                if (name.endsWith(item.condition)) {
+                    return icon
+                }
+            }
+            ConditionType.STARTS_WITH -> {
+                if (name.startsWith(item.condition)) {
+                    return icon
                 }
             }
         }

@@ -4,7 +4,6 @@ import com.intellij.openapi.application.ApplicationActivationListener
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.wm.IdeFrame
 import dev.priporov.customicons.state.Icon
-import dev.priporov.customicons.state.PluginState
 import java.io.File
 import java.lang.invoke.MethodHandles
 import java.nio.file.FileSystems

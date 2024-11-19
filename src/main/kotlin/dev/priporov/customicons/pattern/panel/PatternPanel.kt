@@ -130,6 +130,8 @@ class PatternPanel {
             ConditionType.EQUALS -> EqualsPatternItem(condition)
             ConditionType.CONTAINS -> ContainsPatternItem(condition)
             ConditionType.EXTENSION -> ExtensionEqualsPatternItem(condition)
+            ConditionType.ENDS_WITH -> EndsWithPatternItem(condition)
+            ConditionType.STARTS_WITH -> StartsWithPatternItem(condition)
         }
         item.fileType = fileType
         item.iconContainer = selectedIcon
