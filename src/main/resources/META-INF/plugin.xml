@@ -31,6 +31,8 @@
     <change-notes>
         <![CDATA[
         <ul>
+            <li>1.0.0: added new colored class icons </li>
+            <li>1.0.0: added starts_with, ends_with conditions </li>
             <li>0.9.3: state saving issue #1 fix </li>
         </ul>
         ]]>

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "dev.priporov"
-version = "0.9.3"
+version = "1.0.0"
 //"icon-customizer"
 
 repositories {
