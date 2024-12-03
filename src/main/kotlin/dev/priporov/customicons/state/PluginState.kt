@@ -8,7 +8,7 @@ import javax.swing.ImageIcon
 
 class PluginState {
 
-    var versionIcon:String? = Icon.VERSION
+    var versionIcon:String? = null
     var items = HashMap<String, ConditionItemInfo>()
 
     constructor(versionIcon: String?, items: HashMap<String, ConditionItemInfo>) {

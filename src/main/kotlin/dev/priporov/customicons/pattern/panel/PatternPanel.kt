@@ -21,6 +21,8 @@ import javax.swing.*
 import javax.swing.event.DocumentEvent
 import javax.swing.event.DocumentListener
 
+private const val SIZE_LIMIT = 24
+
 class PatternPanel {
     lateinit var root: JPanel
 
@@ -234,9 +236,12 @@ class PatternPanel {
                 if (!isImage) {
                     return@withFileFilter false
                 }
+                if (file.length == 0L || file.length > 3000) {
+                    return@withFileFilter false
+                }
 
                 val read: BufferedImage = ImageIO.read(file.inputStream)
-                if (read.width > 24 || read.height > 24) {
+                if (read.width > SIZE_LIMIT || read.height > SIZE_LIMIT) {
                     return@withFileFilter false
                 }
                 return@withFileFilter true
