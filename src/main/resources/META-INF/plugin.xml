@@ -17,7 +17,7 @@
         </ul>
 
         <p>
-            <img src="https://github.com/epm-dev-priporov/idea-icon-customizer/blob/master/img.png?raw=true">
+            <img src="https://private-user-images.githubusercontent.com/30048339/392995018-1303086c-3a02-4d4f-9aa1-9b8de38d4999.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzM0MzMwMTcsIm5iZiI6MTczMzQzMjcxNywicGF0aCI6Ii8zMDA0ODMzOS8zOTI5OTUwMTgtMTMwMzA4NmMtM2EwMi00ZDRmLTlhYTEtOWI4ZGUzOGQ0OTk5LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEyMDUlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMjA1VDIxMDUxN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTY3MDMyODUxOGQ3NzI2MjgyYjc5MmQ5YWQzNzBkMTkxZjg4ZjYyYWVhYzM3MjllZjUyYzI2NGZlMzU0Nzk2MzcmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.9hX5Wxlg5XB7cpUMiVpmp05qSMHckACc6jVloilNyGE">
         </p>
 
         <p>The plugins will be improved in case of good feedback, so please don't hesitate and star the plugin.
@@ -31,6 +31,10 @@
     <change-notes>
         <![CDATA[
         <ul>
+            <li>1.0.0: updated to 243.* version build</li>
+            <li>1.0.0: fixed empty image issue</li>
+            <li>1.0.0: improved settings dialog</li>
+            <li>1.0.0: fixed disappeared icon</li>
             <li>1.0.0: added new colored class icons </li>
             <li>1.0.0: added starts_with, ends_with conditions </li>
             <li>0.9.3: state saving issue #1 fix </li>
