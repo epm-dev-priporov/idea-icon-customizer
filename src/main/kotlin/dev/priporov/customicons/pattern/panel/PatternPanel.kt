@@ -76,6 +76,7 @@ class PatternPanel {
         saveButton.isVisible = false
         applyButton.isVisible = true
         applyButton.isEnabled = false
+        selectedIcon = item.iconContainer
 
         val conditionFieldEditingAction = ConditionFieldEditingAction(this, applyButton, item.condition)
         State.documentListener.apply {
